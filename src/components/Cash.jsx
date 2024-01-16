@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
 import line from '../img/line.svg'
-
+import { useTheme } from '../contexts/ThemeContext'
 
 
 export default function Cash() {
   
+    const { darkMode } = useTheme()
  const[enabled,setEnabled] = useState(false)
 
   return (
-    <div className='mt-20'>
+    <div className='mt-20 '>
         <hr />
  
         <div className='flex gap-72 mt-5' >
         <h1 className='text-3xl font-semibold text-gray-500 mt-7'>Кассы</h1>
 
         <div className='mt-5'>
-        <img className='w-[1200px]' src={line} alt="line" />
-       <div className='flex justify-between'>
-       <h1 className='text-gray-400 text-xl px-8 mt-3'>Касса</h1>
-       <h1 className='text-gray-400 text-xl px-8 mt-3'>Статус</h1>
+        <img className='w-[740px]' src={line} alt="line" />
+       <div className='flex gap-[530px] '>
+       <h1 className='text-gray-400 text-xl px-6 mt-3'>Касса</h1>
+       <h1 className='text-gray-400 text-xl px-6 mt-3'>Статус</h1>
        </div>
         <div className='mt-5'>
-        <img className='w-[1200px]' src={line} alt="line" />
+        <img className='w-[740px]' src={line} alt="line" />
         </div>
-        <div className='px-7'>
-        <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12'>
+        <div className='px-5'>
+        <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                  <div className='flex gap-96'>
                     <div className=' text-gray-700 text-xl pt-6 px-6'>
                     <h1>Cashbox Riviera</h1>
@@ -59,7 +60,7 @@ export default function Cash() {
         </div>
 
                <div className='mt-4'>
-               <img className='w-[1200px]' src={line} alt="line" />
+               <img className='w-[740px]' src={line} alt="line" />
                </div>
         </div>
            

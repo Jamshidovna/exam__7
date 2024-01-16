@@ -1,7 +1,6 @@
 import React from 'react'
 import Store from '../img/store.svg'
-
-
+import { useTheme } from '../contexts/ThemeContext'
 import { useGlobalContext } from '../context'
 import Contact from '../components/Contact'
 import Rekvizit from '../components/Rekvizit'
@@ -10,6 +9,7 @@ import Check_up from '../components/Check_up'
 
 export default function StoreRivera() {
 
+    const { darkMode } = useTheme()
     const {addPage2,
         isToggleOn, setIsToggleOn,
         isToggleOn1, setIsToggleOn1,
@@ -18,11 +18,17 @@ export default function StoreRivera() {
         isToggleOn4, setIsToggleOn4,
         isToggleOn5, setIsToggleOn5,
         isToggleOn6, setIsToggleOn6,
+        setStore, store,
+        kvadrat, setKvadrat,
+        checks,
+        addLocalStorage
+
         } = useGlobalContext()
 
   return (
     <div>
-        <div className='flex justify-between mt-11 mb-8 '>
+        <div>
+            <div className='flex gap-[400px] mt-11 mb-8 '>
             <div className='flex items-center gap-4  '>
                 <button onClick={addPage2} className='px-3.5 py-3 bg-gray-100 border rounded-full'>
                 <img src={Store} alt="img" />
@@ -31,10 +37,11 @@ export default function StoreRivera() {
             <h1 className='font-semibold text-4xl'><span className='text-gray-200 '>Магазин</span> Store Riviera</h1>
             </div>
             <div className='flex gap-4'>
-            <button className='px-5 py-4 bg-gray-100 rounded-s-2xl rounded-e-2xl'>Сбросить</button>
-            <button className='px-5 py-4 bg-gray-100 rounded-s-2xl rounded-e-2xl'>Сохранить</button>
+            <button className={` px-5 py-4 bg-gray-100 rounded-s-2xl rounded-e-2xl ${darkMode ? 'bg-gray-700 text-white' : ''}`}>Сбросить</button>
+            <button disabled={checks} onClick={addLocalStorage} className={ `${checks ? 'bg-gray-700' : 'bg-blue-500'} px-5 py-2  rounded-s-2xl rounded-e-2xl text-gray-400 font-semibold`}>Сохранить</button>
             </div>
-
+           
+            </div>
         </div>
         <hr />
         <div >
@@ -42,18 +49,25 @@ export default function StoreRivera() {
             <h1 className='w-[400px] text-gray-500 font-semibold text-3xl'>Основные</h1>
             <div>
                 <div className='flex gap-9 '>
-                <div>
+                <div >
                     <h1 className='text-gray-500 font-semibold'>Наименование</h1>
-                    <input type="text" className='mt-3 px-20 py-4 rounded-s-2xl rounded-e-2xl bg-gray-100' />
+                    <input type="text" className={`border-b-[1px] mt-3 px-16 py-4 font-semibold rounded-s-2xl rounded-e-2xl placeholder:text-gray-600  ${darkMode ? 'bg-gray-700' : ' bg-gray-100'}`}
+                    name='store'
+                    value={store}
+                    onChange={(e) =>{setStore(e.target.value)}}/>
                 </div>
                 <div>
                     <h1 className='text-gray-500 font-semibold'>Квадратура</h1>
-                    <input type="text" className='mt-3 px-20 py-4 rounded-s-2xl rounded-e-2xl bg-gray-100' />
+                    <input type="text" className={`border-b-[1px] mt-3 px-16 py-4 font-semibold rounded-s-2xl rounded-e-2xl    ${darkMode ? 'bg-gray-700 placeholder:text-gray-300' : ' bg-gray-100 placeholder:text-gray-600'}`}
+                    name='store'
+                    placeholder='Введите квадратуру    м2'
+                    value={kvadrat}
+                    onChange={(e) => setKvadrat(e.target.value)}/>
                 </div>
                 </div>
                 <h1 className='text-gray-500 mt-12 font-semibold text-xl'>Режим работы</h1>
 
-                <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                  <div className='flex justify-between gap-12'>
                     <div className='  w-40  text-gray-600 text-xl pt-6 px-6'>
                     <h1>Понедельник</h1>
@@ -69,7 +83,7 @@ export default function StoreRivera() {
                  </div>
                    <div>
                     <button className=' py-6 px-6 '>
-                    <div className="relative flex flex-col items-center justify-center overflow-hidden">
+                    <div className="relative flex flex-col items-center justify-center ">
              <div className="flex">
                 <label className="inline-flex relative items-center mr-5 cursor-pointer">
                     <input
@@ -91,7 +105,7 @@ export default function StoreRivera() {
                     </div>
                 </div>
 
-                <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    <div className='flex justify-between gap-12'>
                       <div className=' w-40  text-gray-600 text-xl pt-6 px-6'>
                       <h1>Вторник</h1>
@@ -129,7 +143,7 @@ export default function StoreRivera() {
                         </div>
                   </div>
 
-                  <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                  <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    
                    <div className='flex justify-between gap-12'>
                       <div className='  w-40  text-gray-600 text-xl pt-6 px-6'>
@@ -167,7 +181,7 @@ export default function StoreRivera() {
                         </div>
                   </div>
 
-                  <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                  <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    <div className='flex justify-between gap-12'>
                       <div className=' w-40  text-gray-600 text-xl pt-6 px-6'>
                       <h1>Четверг</h1>
@@ -203,7 +217,7 @@ export default function StoreRivera() {
                         </button></div>
                   </div>
 
-                  <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                  <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    <div className='flex justify-between gap-12'>
                       <div className='w-40  text-gray-600 text-xl pt-6 px-6'>
                       <h1>Пятница</h1>
@@ -240,7 +254,7 @@ export default function StoreRivera() {
                         </div>
                   </div>
 
-                  <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                  <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    <div className='flex justify-between gap-12'>
                       <div className=' w-40  text-gray-600 text-xl pt-6 px-6'>
                       <h1>Суббота</h1>
@@ -276,10 +290,10 @@ export default function StoreRivera() {
                         </button></div>
                   </div>
 
-                  <div className='w-[720px] bg-gray-100 h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-800'>
+                  <div className={`w-[720px]  h-20 rounded-s-2xl rounded-e-2xl mt-4 flex gap-12 border hover:border-blue-700 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100'}`}>
                    <div className='flex justify-between gap-12'>
                       <div className=' w-40  text-gray-600 text-xl pt-6 px-6'>
-                      <h1>Суббота</h1>
+                      <h1>Воскресенье</h1>
                       </div>
                       <div className='flex gap-5 text-gray-400 text-xl pt-6'>
                       <h1>Открытие:</h1>
@@ -330,6 +344,8 @@ export default function StoreRivera() {
         <Contact/>
         <Rekvizit/>
     </div>
+   
+    
   )
 };
 
